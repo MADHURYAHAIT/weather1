@@ -2,7 +2,6 @@ const http = require("http");
 const fs = require("fs");
 var requests = require("requests");
 const homeFile = fs.readFileSync("main.html", "utf-8");
-//var place = 'majitar';
 
 const replaceVal = (tempVal, orgVal) => {
     let temperature = tempVal.replace("{%tempval%}", orgVal.main.temp);
@@ -21,7 +20,7 @@ const replaceVal = (tempVal, orgVal) => {
 const server = http.createServer((req, res) => {
     if (req.url = "/") {
         requests("http://api.openweathermap.org/data/2.5/weather?q=majitar&units=metric&appid=5ff68fcc483ffa960d4ee98fb6f375a5")
-            .on('data', (chunk) => {
+      .on('data', (chunk) => {
                 const objdata = JSON.parse(chunk);
                 const arrData = [objdata];
                 // console.log(arrData[0].main.temp);
