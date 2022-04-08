@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--  <link rel="stylesheet" href="m.css" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+</head>
+<title>
+    weather
+</title>
+
+<body>
+    <div class="bg"></div>
+    <div class="credit">made by Madhurya :)</div>
+
+    <div class="parent">
+        <div class="Place">Majitar ,Sikkim ,IN</div>
+
+        <div class="style1">
+
+            WEATHER
+        </div>
+
+        <!--Widget-->
+        <div class="container">
+
+            <!--  <image src="https://img.icons8.com/color/2x/sun--v2.gif" class="icon" ></image>-->
+            <i class="fa-solid fa-sun" style="color: rgb(0, 0, 0)"></i> Sunny
+
+
+        </div>
+        <div class="Temp">
+            {%tempval%}&deg;C
+        </div>
+        <div class="Lowercont">
+            <hr> Pressure : {%pressure%} <br> Humidity: {%humidity%} % <br> Wind Speed: {%windspeed%} kmph<br> Temperature feels like : {%tempfeelslike%}&deg;C;
+        </div>
+    </div>
+
+    <div class="info">
+
+        <p id="date"> WED | OCT 23 | 10:49PM</p>
+    </div>
+    <script>
+        const curDate = document.getElementById("date");
+        let weathercon = document.getElementById("weathercon");
+        const tempStatus = "{%tempstatus%}"
+
+        const getCurrentDay = () => {
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            let currentTime = new Date();
+            let day = weekday[currentTime.getDay()];
+            return day;
+        };
+
+        const getCurrentTime = () => {
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "june",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+            var now = new Date();
+            var month = months[now.getMonth() + 1];
+            var date = now.getDate();
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+
+
+
+            let periods = "AM";
+            if (hours > 11) {
+                periods = "PM";
+                if (hours > 12) hours -= 12;
+            }
+            if (mins < 10) {
+                mins = "0" + mins;
+            }
+
+            //console.log(month+"/"+day);
+            return `${month} ${date} | ${hours} : ${mins} ${periods}`;
+        };
+
+        // getCurrentTime();
+        //getCurrentDay()
+        curDate.innerHTML = getCurrentDay() + " | " + getCurrentTime();
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+        body,
+        html {
+            background-color: rgb(10, 0, 9);
+            height: 100%;
+            margin: 0;
+            background-size: cover;
+        }
+        
+        .bg {
+            background-image: url("https://images.unsplash.com/photo-1633428183419-af06edd6eb86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2864&q=80");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(30px);
+            -webkit-filter: blur(4px);
+        }
+        
+        .parent {
+            padding-left: auto;
+            height: 430px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: -600px;
+            padding-bottom: 100px;
+            margin-bottom: auto;
+            width: 375px;
+            background-color: rgb(245, 245, 244);
+            background-size: cover;
+            background-blend-mode: luminosity;
+            opacity: 56%;
+            border-radius: 7%;
+        }
+        
+        .style1 {
+            padding-top: -30px;
+            text-align: center;
+            font-size: 53px;
+            text-shadow: 2px 2px 7px #1d1b1b;
+            font: bold;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+        }
+        
+        .Temp {
+            padding-right: auto;
+            margin-top: 5px;
+            margin-left: auto;
+            position: relative;
+            align-self: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            font-size: 85px;
+            font: bold;
+            color: rgb(223, 9, 9);
+            text-shadow: 2px 2px 7px #1d1b1b;
+        }
+        
+        .container {
+            margin-top: 4px;
+            margin-left: -20px;
+            position: relative;
+            align-self: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            font-size: 40px;
+            color: rgb(38, 35, 204);
+            text-shadow: 1px 1px #000000;
+            font: bold;
+        }
+        
+        .Lowercont {
+            padding-left: 55px;
+            padding-right: 55px;
+            padding-top: 80px;
+            position: relative;
+            align-self: center;
+            font: bold;
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        .info {
+            margin-top: -240px;
+            margin-left: auto;
+            position: relative;
+            align-self: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            font-size: 23px;
+            color: rgb(104, 101, 101);
+            font: bold;
+        }
+        
+        .Place {
+            padding-top: 30px;
+            margin-left: auto;
+            position: relative;
+            align-self: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            font-size: 23px;
+            color: rgb(97, 94, 94);
+            font: bold;
+        }
+        
+        .credit {
+            color: rgb(245, 238, 238);
+            position: relative;
+            align-self: center;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            font-size: 16px;
+            text-indent: 2px;
+            width: 280px;
+            height: 25px;
+            margin-top: -100px;
+            margin-bottom: auto;
+            padding-left: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 8px;
+            background-size: cover;
+            background-blend-mode: luminosity;
+        }
+    </style>
+</body>
+
+</html>
